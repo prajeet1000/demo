@@ -7,7 +7,8 @@ RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selectio
     && echo "tzdata tzdata/Zones/Indian select Kolkata" | debconf-set-selections
 
 # Install Git, Apache, MySQL, and PHP
-RUN apt-get update && apt-get install -y git apache2
+RUN apt-get update && apt-get install -y apache2
+RUN apt install git
 RUN apt-get install -y mysql-server
 RUN echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 
