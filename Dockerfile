@@ -5,7 +5,7 @@ FROM ubuntu:20.04
 
 # Install Git, Apache, MySQL, and PHP
 RUN apt-get update && apt-get install -y apache2
-RUN apt install git
+RUN apt install git -y 
 
 # Clone the code from GitHub repository
 RUN git clone https://github.com/prajeet1000/simple-php-form.git
