@@ -1,4 +1,4 @@
- $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
+<?php $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
   $username = "admin";
   $password = "prajeetkumar";
   $dbname = "database1";
