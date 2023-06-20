@@ -18,6 +18,12 @@ RUN service mysql start && mysql_secure_installation
 # Cleanup unnecessary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Modify Apache directory index configuration
+RUN echo '<IfModule mod_dir.c>\n    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm\n</IfModule>' | tee /etc/apache2/mods-enabled/dir.conf
+
+# Start Apache service
+CMD ["apachectl", "-D", "FOREGROUND"]
+
 
 
 # Clone the code from GitHub repository
