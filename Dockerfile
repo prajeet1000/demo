@@ -12,8 +12,12 @@ RUN apt-get install -y git
 RUN apt-get install -y mysql-server
 RUN apt-get install -y php libapache2-mod-php php-mysql
 
-# Secure MySQL installation
-RUN mysql_secure_installation
+# Secure MySQL installation and start MySQL service
+RUN service mysql start \
+    && mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'prajeetkumar'; FLUSH PRIVILEGES;" \
+    && mysql -e "CREATE DATABASE your_database;" \
+    && mysql -e "GRANT ALL PRIVILEGES ON your_database.* TO 'your_user'@'localhost' IDENTIFIED BY 'prajeetkumar';" \
+    && mysql -e "FLUSH PRIVILEGES;"
 
 # Cleanup unnecessary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -21,8 +25,10 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 # Modify Apache directory index configuration
 RUN echo '<IfModule mod_dir.c>\n    DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm\n</IfModule>' | tee /etc/apache2/mods-enabled/dir.conf
 
-# Start Apache service
-CMD ["apachectl", "-D", "FOREGROUND"]
+# Start Apache and MySQL services
+CMD service apache2 start && service mysql start && tail -f /var/log/apache2/error.log
+
+
 
 
 
