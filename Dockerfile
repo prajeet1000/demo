@@ -24,7 +24,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 CMD service apache2 start && service mysql start && tail -f /var/log/apache2/error.log
 
 # Clone the code from GitHub repository
-RUN https://github.com/prajeet1000/demo.git
+RUN git clone https://github.com/prajeet1000/demo.git
 
 # Remove default content in the document root directory
 RUN rm -r /var/www/html/*
