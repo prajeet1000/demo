@@ -1,6 +1,10 @@
 # Base image
 FROM ubuntu:20.04
 
+# Set debconf to automatically select Indian geographic area
+RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
+    && echo "tzdata tzdata/Areas select Indian" | debconf-set-selections \
+    && echo "tzdata tzdata/Zones/Indian select Kolkata" | debconf-set-selections
 
 
 # Install Git, Apache, MySQL, and PHP
