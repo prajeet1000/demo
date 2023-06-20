@@ -7,7 +7,7 @@ RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selectio
     && echo "tzdata tzdata/Zones/Indian select Kolkata" | debconf-set-selections
 
 # Install Apache, MySQL, and PHP
-RUN apt-get update && apt-get install -y apache2 mysql-server php libapache2-mod-php php-mysql
+RUN apt-get update && apt-get install -y apache2 mysql-server php libapache2-mod-php php-mysql git
 
 # Secure MySQL installation and start MySQL service
 RUN service mysql start \
