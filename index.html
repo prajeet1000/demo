@@ -60,6 +60,22 @@ function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
+
+  $servername = "database-1.chu2hpbhxioh.ap-northeast-1.rds.amazonaws.com";
+  $username = "admin";
+  $password = "prajeetkumar";
+  $dbname = "database1";
+  
+  // Create connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  $sql = "INSERT INTO MyGuests (name, gender) VALUES ($data['name'],$data['gender'])";
+  if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+  
+  $conn->close();
   return $data;
 }
 ?>
