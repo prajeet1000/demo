@@ -13,7 +13,7 @@ RUN apt-get install -y mysql-server
 RUN apt-get install -y php libapache2-mod-php php-mysql
 
 # Secure MySQL installation
-RUN service mysql start && mysql_secure_installation
+RUN mysql_secure_installation
 
 # Cleanup unnecessary files
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
