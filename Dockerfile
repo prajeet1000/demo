@@ -24,14 +24,14 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 CMD service apache2 start && service mysql start && tail -f /var/log/apache2/error.log
 
 # Clone the code from GitHub repository
-RUN git clone https://github.com/prajeet1000/simple-php-form.git
+RUN https://github.com/prajeet1000/demo.git
 
 # Remove default content in the document root directory
 RUN rm -r /var/www/html/*
 
 # Copy the cloned folder to the Apache web root
 RUN chmod -R 755 /var/www/html/
-RUN cp -r simple-php-form/* /var/www/html/
+RUN cp -r demo/* /var/www/html/
 
 # Expose port 80 for Apache
 EXPOSE 80
