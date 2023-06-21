@@ -8,7 +8,9 @@ RUN apt-get update
 RUN apt-get install -y apache2 mysql-server php libapache2-mod-php php-mysql
 
 # Configure MySQL
-RUN service mysql start
+RUN service mysql start  && \
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'prajeetkumar'; FLUSH PRIVILEGES;"
+
 
 
 
