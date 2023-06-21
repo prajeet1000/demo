@@ -1,18 +1,14 @@
+# Use the official Ubuntu 16.04 base image
+FROM ubuntu:16.04
 
-FROM ubuntu:latest
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install -y apache2 
-RUN apt-get install -y php 
-RUN apt-get install -y php-dev 
-RUN apt-get install -y php-mysql 
-RUN apt-get install -y libapache2-mod-php 
-RUN apt-get install -y php-curl 
-RUN apt-get install -y php-json 
-RUN apt-get install -y php-common 
-RUN apt-get install -y php-mbstring 
-RUN apt-get install -y composer
+# Update the package lists
+RUN apt-get update
+
+# Install Apache, MySQL, and PHP
+RUN apt-get install -y apache2 mysql-server php libapache2-mod-php php-mysql
+
+# Configure MySQL
+RUN service mysql start
 
 
 
