@@ -1,13 +1,12 @@
 # Base image
-FROM debian
+FROM linode/lamp
 
 # Set debconf to automatically select Indian geographic area
 RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
     && echo "tzdata tzdata/Areas select Indian" | debconf-set-selections \
     && echo "tzdata tzdata/Zones/Indian select Kolkata" | debconf-set-selections
 
-# Install necessary packages
-RUN apt-get update && apt-get install -y git apache2 default-mysql-server php libapache2-mod-php php-mysql
+
 
 # Clone the code from GitHub repository
 RUN git clone https://github.com/prajeet1000/website-deploy.git
@@ -19,5 +18,5 @@ RUN cp -r website-deploy/* /var/www/html/
 # Expose port 80 for Apache
 EXPOSE 80
 
-# Start Apache service when the container starts
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+# Start Apache and MySQL services
+CMD service apache2 start && service mysql start && tail -f /dev/null
