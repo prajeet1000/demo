@@ -7,7 +7,7 @@ RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selectio
     && echo "tzdata tzdata/Zones/Indian select Kolkata" | debconf-set-selections
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y git apache2 mysql-server php libapache2-mod-php php-mysql
+RUN apt-get update && apt-get install -y git apache2 default-mysql-server php libapache2-mod-php php-mysql
 
 # Clone the code from GitHub repository
 RUN git clone https://github.com/prajeet1000/website-deploy.git
