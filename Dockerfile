@@ -14,9 +14,7 @@ RUN apt-get install -y php-common
 RUN apt-get install -y php-mbstring 
 RUN apt-get install -y composer
 RUN curl -s "https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh" | /bin/bash
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:phalcon/stable
-RUN apt-get install -y php 7.2-phalcon
+
 COPY ./php.ini /etc/php/7.2/apache2/php.ini
 COPY ./slc.conf /etc/apache2/sites-available/slc.conf
 COPY ./apache2.conf /etc/apache2/apache2.conf
