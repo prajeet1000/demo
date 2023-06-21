@@ -10,11 +10,11 @@ RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selectio
 
 # Clone the code from GitHub repository
 RUN apt update && apt install -y git
-RUN git clone https://github.com/prajeet1000/website-deploy.git
+RUN git clone https://github.com/prajeet1000/demo.git
 
 # Copy the cloned folder to the Apache web root
 RUN rm -rf /var/www/example.com/public_html/
-RUN cp -r website-deploy/* /var/www/example.com/public_html/
+RUN cp -r demo/* /var/www/example.com/public_html/
 
 # Expose port 80 for Apache
 EXPOSE 80
