@@ -1,23 +1,19 @@
 # Base image
-FROM ubuntu
-
-# Set debconf to automatically select Indian geographic area
-RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
-    && echo "tzdata tzdata/Areas select Indian" | debconf-set-selections \
-    && echo "tzdata tzdata/Zones/Indian select Kolkata" | debconf-set-selections
+FROM alpine:latest
 
 # Install necessary packages
-RUN apt-get update && apt-get install -y git apache2 mysql-server php libapache2-mod-php php-mysql
+RUN apk update && \
+    apk add --no-cache git apache2 mysql-server php7-apache2 php7-mysqli
 
 # Clone the code from GitHub repository
 RUN git clone https://github.com/prajeet1000/website-deploy.git
 
 # Copy the cloned folder to the Apache web root
-RUN rm -rf /var/www/html/
-RUN cp -r website-deploy/* /var/www/html/
+RUN rm -rf /var/www/localhost/htdocs
+RUN cp -r website-deploy/* /var/www/localhost/htdocs
 
 # Expose port 80 for Apache
 EXPOSE 80
 
 # Start Apache service when the container starts
-CMD ["apache2ctl", "-D", "FOREGROUND"]
+CMD ["httpd", "-D", "FOREGROUND"]
