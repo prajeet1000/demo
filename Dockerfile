@@ -1,15 +1,14 @@
-# Use the official Ubuntu 16.04 base image
-FROM ubuntu:16.04
-
-# Update the package lists
-RUN apt-get update
-
-# Install Apache, MySQL, and PHP
-RUN apt-get install -y apache2  php libapache2-mod-php php-mysql mysql-server
-
-# Configure MySQL
-RUN service mysql start  && \
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'prajeetkumar'; FLUSH PRIVILEGES;"
+FROM ubuntu:latest
+RUN  apt-get update \
+  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    apache2 \
+    mysql-server \
+    php7.0 \
+    php7.0-bcmath \
+    php7.0-mcrypt
+COPY start-script.sh /root/
+RUN chmod +x /root/start-script.sh 
+CMD /root/start-script.sh
 
 
 
