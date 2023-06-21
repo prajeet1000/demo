@@ -1,5 +1,5 @@
 # Base image
-FROM ubuntu 20.4
+FROM ubuntu
 
 # Set debconf to automatically select Indian geographic area
 RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selections \
