@@ -9,7 +9,8 @@ RUN echo "debconf debconf/frontend select Noninteractive" | debconf-set-selectio
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y git
-RUN apt-get install lamp-server^
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
 
 
 # Clone the code from GitHub repository
