@@ -5,7 +5,7 @@ FROM ubuntu:16.04
 RUN apt-get update
 
 # Install Apache, MySQL, and PHP
-RUN apt-get install -y apache2 mysql-server php libapache2-mod-php php-mysql
+RUN apt-get install -y apache2  php libapache2-mod-php php-mysql mysql-server
 
 # Configure MySQL
 RUN service mysql start  && \
